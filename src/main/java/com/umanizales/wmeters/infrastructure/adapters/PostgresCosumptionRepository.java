@@ -7,8 +7,9 @@ import com.umanizales.wmeters.infrastructure.repositories.CosumptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
+
+
 @Qualifier("PostgresCosumptionRepository")
 @Repository("cosumptionPersistence")
 public class PostgresCosumptionRepository implements CosumptionAble {

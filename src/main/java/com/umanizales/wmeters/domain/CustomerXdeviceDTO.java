@@ -15,16 +15,14 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CustomerXdeviceDTO {
-    @NotNull
-    @NotEmpty
+
+
     private Date dateInstallation;
-    @NotNull
-    @NotEmpty
+
+
     private DeviceEntity uid_device;
-    @NotNull
-    @NotEmpty
+
     private CustomerEntity uid_customer;
-    @NotNull
-    @NotEmpty
+
     private CosumptionEntity uid_cosumption;
 }

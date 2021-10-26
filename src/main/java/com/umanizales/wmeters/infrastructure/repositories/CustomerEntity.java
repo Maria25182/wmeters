@@ -20,7 +20,6 @@ import java.util.UUID;
 public class CustomerEntity {
     @Id
     @Column(name = "uid_customer", nullable = false, length = -1)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String uidCustomer;
     @Basic
     @Column(name = "name_customer", nullable = true, length = -1)

@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.UUID;
 
@@ -24,7 +25,7 @@ public class CustomerXdeviceEntity {
 
     @Basic
     @Column(name = "date_installation", nullable = false)
-    private Date dateInstallation;
+    private LocalDate dateInstallation;
     @ManyToOne
     @Id
     @Column(name = "uid_device", nullable = false, length = -1)

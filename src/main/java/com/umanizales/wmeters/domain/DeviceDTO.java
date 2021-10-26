@@ -13,13 +13,10 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DeviceDTO {
-    @NotNull
-    @NotEmpty
-    private String uidDevice;
-    @NotNull
-    @NotEmpty
+
+
+
     private String name;
-    @NotNull
 
     private String description;
 }

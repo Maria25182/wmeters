@@ -13,29 +13,19 @@ import javax.validation.constraints.Positive;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CustomerDTO extends CustomerXdeviceDTO {
+
     @NotNull
-    @NotEmpty
-    private String uidCustomer;
-    @NotNull
-    @NotEmpty
     private String nameCustomer;
     @NotNull
-    @NotEmpty
     private String lastName;
     @NotNull
-    @NotEmpty
     private String email;
     @NotNull
-    @NotEmpty
     private String address;
     @NotNull
-    @NotEmpty
     private String supplier;
     @NotNull
-    @NotEmpty
-    @Positive
     private Integer phone;
     @NotNull
-    @NotEmpty
     private String password;
 }
