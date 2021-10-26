@@ -1,11 +1,15 @@
 package com.umanizales.wmeters.infrastructure.repositories;
 
+import com.umanizales.wmeters.domain.CustomerDTO;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.BeanUtils;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -40,5 +44,15 @@ public class CustomerEntity {
     @Column(name = "password", nullable = true, length = -1)
     private String password;
 
+    public CustomerEntity(CustomerDTO customerDTO) {
+        BeanUtils.copyProperties(customerDTO,this);
+        //generar uid
+        this.uidCustomer = UUID.randomUUID().toString();
+    }
 
+    public CustomerDTO tocustomerDTO(){
+        CustomerDTO customerDTO= new CustomerDTO();
+        BeanUtils.copyProperties(this,customerDTO);
+        return customerDTO;
+    }
 }

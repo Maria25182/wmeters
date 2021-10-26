@@ -18,11 +18,11 @@ public class CustomerXdeviceEntityPK implements Serializable {
     @Column(name = "uid_customer", nullable = false, length = -1)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String uidCustomer;
+    private String uid_customer;
     @Column(name = "uid_device", nullable = false, length = -1)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String uidDevice;
+    private String uid_device;
 
 
 }

@@ -1,4 +1,6 @@
 package com.umanizales.wmeters.infrastructure.repositories;
 
-public interface CustomerRespository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CustomerRespository extends JpaRepository<CustomerEntity,String> {
 }
