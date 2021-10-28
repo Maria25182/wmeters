@@ -1,20 +1,19 @@
 package com.umanizales.wmeters.infrastructure.adapters;
 
 import com.umanizales.wmeters.application.CustomerXdeviceAble;
+import com.umanizales.wmeters.domain.CustomerDTO;
 import com.umanizales.wmeters.domain.CustomerXdeviceDTO;
-import com.umanizales.wmeters.infrastructure.repositories.CosumptionEntity;
-import com.umanizales.wmeters.infrastructure.repositories.CosumptionRepository;
-import com.umanizales.wmeters.infrastructure.repositories.CustomerXdeviceEntity;
-import com.umanizales.wmeters.infrastructure.repositories.CustomerXdeviceRepository;
+import com.umanizales.wmeters.infrastructure.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 @Qualifier("PostgresCustomerXdeviceRepository")
 @Repository("customerXdevicePersistence")
-public class PostgresCustomerXdeviceRepository {
- /*   @Autowired
+public class PostgresCustomerXdeviceRepository implements  CustomerXdeviceAble{
+   @Autowired
     private CustomerXdeviceRepository customerXdeviceRepository;
     @Override
     public CustomerXdeviceDTO save(CustomerXdeviceDTO CustomerXdeviceDTO) {
@@ -23,7 +22,7 @@ public class PostgresCustomerXdeviceRepository {
 
     @Override
     public CustomerXdeviceDTO update(CustomerXdeviceDTO CustomerXdeviceDTO) {
-        return  customerXdeviceRepository.save(new CustomerXdeviceEntity(CustomerXdeviceDTO)).tocustomerxDeviceDTO();
+     return  null;
     }
 
     @Override
@@ -31,11 +30,14 @@ public class PostgresCustomerXdeviceRepository {
        customerXdeviceRepository.deleteById(code);
         return true;
     }
-
     @Override
     public List<CustomerXdeviceDTO> list() {
-        return null;
+        List<CustomerXdeviceEntity> customers = customerXdeviceRepository.findAll();
+        List<CustomerXdeviceDTO> customerXdeviceDTOS = new ArrayList<>();
+        for(CustomerXdeviceEntity cusxdevice: customers){
+           customerXdeviceDTOS.add(cusxdevice.tocustomerxDeviceDTO());
+        }
+        return customerXdeviceDTOS;
     }
 
-*/
 }

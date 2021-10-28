@@ -1,5 +1,6 @@
 package com.umanizales.wmeters.infrastructure.repositories;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.umanizales.wmeters.domain.CustomerDTO;
 import com.umanizales.wmeters.domain.CustomerXdeviceDTO;
 import lombok.AllArgsConstructor;
@@ -25,6 +26,7 @@ public class CustomerXdeviceEntity {
 
     @Basic
     @Column(name = "date_installation", nullable = false)
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate dateInstallation;
     @ManyToOne
     @Id
@@ -46,10 +48,10 @@ public class CustomerXdeviceEntity {
 
     }
 
-    public CustomerDTO tocustomerxDeviceDTO(){
-        CustomerDTO customerDTO= new CustomerDTO();
-        BeanUtils.copyProperties(this,customerDTO);
-        return customerDTO;
+    public CustomerXdeviceDTO tocustomerxDeviceDTO(){
+        CustomerXdeviceDTO customerXdeviceDTO= new CustomerXdeviceDTO();
+        BeanUtils.copyProperties(this,customerXdeviceDTO);
+        return customerXdeviceDTO;
     }
 
 }

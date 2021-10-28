@@ -8,14 +8,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-public class CustomerXdeviceImp
-        /*implements CustomerXdeviceAble */{
-   /* @Autowired
+public class CustomerXdeviceImp implements CustomerXdeviceAble {
+
     @Qualifier("PostgresCustomerXdeviceRepository")
     private CustomerXdeviceAble customerXdevicePersistence;
     @Override
     public CustomerXdeviceDTO save(CustomerXdeviceDTO customerXdeviceDTO) {
-        return null;
+        return customerXdevicePersistence.save(customerXdeviceDTO);
     }
 
     @Override
@@ -31,5 +30,5 @@ public class CustomerXdeviceImp
     @Override
     public List<CustomerXdeviceDTO> list() {
         return customerXdevicePersistence.list();
-    }*/
+    }
 }
