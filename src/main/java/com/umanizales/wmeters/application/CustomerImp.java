@@ -29,6 +29,6 @@ public class CustomerImp implements CustomerAble{
 
     @Override
     public List<CustomerDTO> list() {
-        return null;
+        return customerPersistence.list();
     }
 }

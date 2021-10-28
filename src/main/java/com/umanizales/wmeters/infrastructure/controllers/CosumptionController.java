@@ -22,4 +22,10 @@ public class CosumptionController {
     ResponseEntity<ResponseDTO> save(@RequestBody @Valid CosumptionDTO cosumptionDTO){
     return new ResponseEntity<>(new ResponseDTO("Success",cosumptionImp.save(cosumptionDTO),null), HttpStatus.OK);
     }
+
+    @GetMapping
+    public @ResponseBody ResponseEntity<ResponseDTO> list(){
+        return  new ResponseEntity<>(new ResponseDTO("success", cosumptionImp. list(),null),
+                HttpStatus.OK);
+    }
 }

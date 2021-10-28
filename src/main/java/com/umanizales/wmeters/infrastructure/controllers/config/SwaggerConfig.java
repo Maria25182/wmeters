@@ -21,8 +21,10 @@ public class SwaggerConfig {
     public Docket apiDocket() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("CosumptionController")
+                .groupName("DeviceController")
+                .groupName("CustomerController")
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.umanizales.walking_dogs.infrastructure.controllers"))
+                .apis(RequestHandlerSelectors.basePackage("com.umanizales.wmeters.infrastructure.controllers"))
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(getApiInfo());

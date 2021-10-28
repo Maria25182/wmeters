@@ -1,22 +1,25 @@
 package com.umanizales.wmeters.application;
 
 import com.umanizales.wmeters.domain.CustomerDTO;
+import com.umanizales.wmeters.domain.CustomerXdeviceDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
-public class CustomerXdeviceImp implements CustomerAble {
-    @Autowired
+@Service
+public class CustomerXdeviceImp
+        /*implements CustomerXdeviceAble */{
+   /* @Autowired
     @Qualifier("PostgresCustomerXdeviceRepository")
     private CustomerXdeviceAble customerXdevicePersistence;
     @Override
-    public CustomerDTO save(CustomerDTO CustomerDTO) {
+    public CustomerXdeviceDTO save(CustomerXdeviceDTO customerXdeviceDTO) {
         return null;
     }
 
     @Override
-    public CustomerDTO update(CustomerDTO CustomerDTO) {
+    public CustomerXdeviceDTO update(CustomerXdeviceDTO CustomerDTO) {
         return null;
     }
 
@@ -26,7 +29,7 @@ public class CustomerXdeviceImp implements CustomerAble {
     }
 
     @Override
-    public List<CustomerDTO> list() {
-        return null;
-    }
+    public List<CustomerXdeviceDTO> list() {
+        return customerXdevicePersistence.list();
+    }*/
 }

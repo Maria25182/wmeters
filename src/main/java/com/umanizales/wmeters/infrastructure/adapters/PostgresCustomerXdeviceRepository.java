@@ -13,8 +13,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Qualifier("PostgresCustomerXdeviceRepository")
 @Repository("customerXdevicePersistence")
-public class PostgresCustomerXdeviceRepository implements CustomerXdeviceAble {
-    @Autowired
+public class PostgresCustomerXdeviceRepository {
+ /*   @Autowired
     private CustomerXdeviceRepository customerXdeviceRepository;
     @Override
     public CustomerXdeviceDTO save(CustomerXdeviceDTO CustomerXdeviceDTO) {
@@ -36,4 +36,6 @@ public class PostgresCustomerXdeviceRepository implements CustomerXdeviceAble {
     public List<CustomerXdeviceDTO> list() {
         return null;
     }
+
+*/
 }

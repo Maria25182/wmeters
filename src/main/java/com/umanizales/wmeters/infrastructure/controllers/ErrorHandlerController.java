@@ -24,5 +24,6 @@ public class ErrorHandlerController {
         ResponseDTO response = new ResponseDTO( message,null , listErrors);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
+
 }
 

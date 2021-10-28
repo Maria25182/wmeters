@@ -1,6 +1,7 @@
 package com.umanizales.wmeters.infrastructure.adapters;
 
 import com.umanizales.wmeters.application.DeviceAble;
+import com.umanizales.wmeters.domain.CosumptionDTO;
 import com.umanizales.wmeters.domain.DeviceDTO;
 import com.umanizales.wmeters.infrastructure.repositories.CosumptionEntity;
 import com.umanizales.wmeters.infrastructure.repositories.CosumptionRepository;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 @Qualifier("PostgresDeviceRepository")
 @Repository("devicePersistence")
@@ -34,6 +36,12 @@ public class PostgresDeviceRepository implements DeviceAble {
 
     @Override
     public List<DeviceDTO> list() {
-        return null;
+        List<DeviceEntity> devices = deviceRepository.findAll();
+        List<DeviceDTO> deviceDTOS= new ArrayList<>();
+        for(DeviceEntity devic: devices){
+            deviceDTOS.add(devic.todeviceDTO());
+        }
+        return deviceDTOS;
     }
+
 }

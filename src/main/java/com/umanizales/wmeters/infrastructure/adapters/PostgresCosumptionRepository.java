@@ -7,6 +7,8 @@ import com.umanizales.wmeters.infrastructure.repositories.CosumptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -34,6 +36,11 @@ public class PostgresCosumptionRepository implements CosumptionAble {
 
     @Override
     public List<CosumptionDTO> list() {
-        return null;
+       List<CosumptionEntity> cosumptions = cosumptionRepository.findAll();
+       List<CosumptionDTO> cosumptionDTO = new ArrayList<>();
+       for(CosumptionEntity cosumptio: cosumptions){
+            cosumptionDTO.add(cosumptio.tocosumptionDTO());
+       }
+       return cosumptionDTO;
     }
 }

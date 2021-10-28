@@ -30,6 +30,6 @@ public class CosumptionImp implements CosumptionAble{
 
     @Override
     public List<CosumptionDTO> list() {
-        return null;
+        return cosumptionPersistence.list();
     }
 }

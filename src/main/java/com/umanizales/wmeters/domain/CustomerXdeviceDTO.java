@@ -18,11 +18,7 @@ public class CustomerXdeviceDTO {
 
 
     private Date dateInstallation;
-
-
     private DeviceEntity uid_device;
-
     private CustomerEntity uid_customer;
-
     private CosumptionEntity uid_cosumption;
 }

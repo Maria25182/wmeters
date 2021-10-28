@@ -1,6 +1,7 @@
 package com.umanizales.wmeters.infrastructure.adapters;
 
 import com.umanizales.wmeters.application.CustomerAble;
+import com.umanizales.wmeters.domain.CosumptionDTO;
 import com.umanizales.wmeters.domain.CustomerDTO;
 import com.umanizales.wmeters.infrastructure.repositories.CosumptionEntity;
 import com.umanizales.wmeters.infrastructure.repositories.CosumptionRepository;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 @Qualifier("PostgresCustomerRepository")
 @Repository("customerPersistence")
@@ -34,6 +36,13 @@ public class PostgresCustomerRepository implements CustomerAble {
 
     @Override
     public List<CustomerDTO> list() {
-        return null;
+
+        List<CustomerEntity> customers = customerRepository.findAll();
+        List<CustomerDTO> customerDTO = new ArrayList<>();
+        for(CustomerEntity custome: customers){
+            customerDTO.add(custome.tocustomerDTO());
+        }
+        return customerDTO;
     }
+
 }

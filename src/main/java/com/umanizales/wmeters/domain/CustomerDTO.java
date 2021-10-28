@@ -12,7 +12,7 @@ import javax.validation.constraints.Positive;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CustomerDTO extends CustomerXdeviceDTO {
+public class CustomerDTO{
 
     @NotNull
     private String nameCustomer;

@@ -3,16 +3,17 @@ package com.umanizales.wmeters.application;
 import com.umanizales.wmeters.domain.DeviceDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class DeviceImp implements DeviceAble{
     @Autowired
     @Qualifier("PostgresDeviceRepository")
     private DeviceAble devicePersistence;
     @Override
-    public DeviceDTO save(DeviceDTO DeviceDTO) {
-        return null;
+    public DeviceDTO save(DeviceDTO deviceDTO) {
+        return devicePersistence.save(deviceDTO);
     }
 
     @Override
@@ -27,6 +28,6 @@ public class DeviceImp implements DeviceAble{
 
     @Override
     public List<DeviceDTO> list() {
-        return null;
+        return devicePersistence.list();
     }
 }
