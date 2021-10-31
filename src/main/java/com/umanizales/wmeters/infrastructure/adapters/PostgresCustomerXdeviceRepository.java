@@ -17,7 +17,7 @@ public class PostgresCustomerXdeviceRepository implements  CustomerXdeviceAble{
     private CustomerXdeviceRepository customerXdeviceRepository;
     @Override
     public CustomerXdeviceDTO save(CustomerXdeviceDTO CustomerXdeviceDTO) {
-        return  customerXdeviceRepository.save(new CustomerXdeviceEntity(CustomerXdeviceDTO)).tocustomerxDeviceDTO();
+        return  customerXdeviceRepository.save(new CustomerXdeviceEntity(CustomerXdeviceDTO)).tocustomexDevicerDTO();
     }
 
     @Override
@@ -35,7 +35,7 @@ public class PostgresCustomerXdeviceRepository implements  CustomerXdeviceAble{
         List<CustomerXdeviceEntity> customers = customerXdeviceRepository.findAll();
         List<CustomerXdeviceDTO> customerXdeviceDTOS = new ArrayList<>();
         for(CustomerXdeviceEntity cusxdevice: customers){
-           customerXdeviceDTOS.add(cusxdevice.tocustomerxDeviceDTO());
+           customerXdeviceDTOS.add(cusxdevice.tocustomexDevicerDTO());
         }
         return customerXdeviceDTOS;
     }

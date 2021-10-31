@@ -10,48 +10,46 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.Date;
+import java.sql.Date;
 import java.util.UUID;
 
 @Entity
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
 @Table(name = "customerXdevice", schema = "public", catalog = "wmeter")
-@IdClass(CustomerXdeviceEntityPK.class)
 public class CustomerXdeviceEntity {
-
 
     @Basic
     @Column(name = "date_installation", nullable = false)
-    @JsonFormat(pattern="yyyy-MM-dd")
-    private LocalDate dateInstallation;
-    @ManyToOne
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date dateInstallation;
     @Id
-    @Column(name = "uid_device", nullable = false, length = -1)
-    @JoinColumn(name = "uid_device", referencedColumnName = "uid_device", nullable = false)
-    private DeviceEntity uid_device;
+    @Column(name = "uid_customerXdevice", nullable = false, length = -1)
+    private String uidCustomerXdevice;
     @ManyToOne
-    @Id
-    @Column(name = "uid_customer", nullable = false, length = -1)
     @JoinColumn(name = "uid_customer", referencedColumnName = "uid_customer", nullable = false)
-    private CustomerEntity uid_customer;
+    private CustomerEntity uid_Customer;
+    @ManyToOne
+    @JoinColumn(name = "uid_device", referencedColumnName = "uid_device", nullable = false)
+    private DeviceEntity uid_Device;
     @ManyToOne
     @JoinColumn(name = "uid_cosumption", referencedColumnName = "uid_cosumption", nullable = false)
-    private CosumptionEntity uid_cosumption;
+    private CosumptionEntity uid_Cosumption;
 
-    public CustomerXdeviceEntity (CustomerXdeviceDTO customerXdeviceDTODTO) {
-        BeanUtils.copyProperties(customerXdeviceDTODTO,this);
+
+
+    public CustomerXdeviceEntity(CustomerXdeviceDTO customerxDeviceDTO) {
+        BeanUtils.copyProperties(customerxDeviceDTO,this);
         //generar uid
-
+        this.uidCustomerXdevice = UUID.randomUUID().toString();
     }
 
-    public CustomerXdeviceDTO tocustomerxDeviceDTO(){
+    public CustomerXdeviceDTO tocustomexDevicerDTO(){
         CustomerXdeviceDTO customerXdeviceDTO= new CustomerXdeviceDTO();
         BeanUtils.copyProperties(this,customerXdeviceDTO);
         return customerXdeviceDTO;
     }
-
 }
