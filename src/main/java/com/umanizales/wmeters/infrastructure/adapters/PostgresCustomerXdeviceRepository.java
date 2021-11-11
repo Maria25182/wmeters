@@ -22,8 +22,8 @@ public class PostgresCustomerXdeviceRepository implements  CustomerXdeviceAble{
     }
 
     @Override
-    public CustomerXdeviceDTO update(CustomerXdeviceDTO CustomerXdeviceDTO) {
-     return  null;
+    public boolean update(String code,CustomerXdeviceDTO customerXdeviceDTO) {
+        return customerXdeviceRepository.update(new CustomerXdeviceEntity(customerXdeviceDTO),code)>=1;
     }
 
     @Override

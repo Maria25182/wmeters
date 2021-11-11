@@ -17,13 +17,12 @@ import java.util.Date;
 public class CustomerXdeviceDTO {
 
 
-
+    @NotNull
     private Date dateInstallation;
-
-
-    private DeviceEntity uid_device;
-
-    private CustomerEntity uid_customer;
-
-    private CosumptionEntity uid_cosumption;
+    @NotNull
+    private DeviceEntity uidDevice;
+    @NotNull
+    private CustomerEntity uidCustomer;
+    @NotNull
+    private CosumptionEntity uidCosumption;
 }

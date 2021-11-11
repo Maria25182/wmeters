@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface CustomerXdeviceAble {
     CustomerXdeviceDTO save(CustomerXdeviceDTO CustomerXdeviceDTO);
-    CustomerXdeviceDTO update(CustomerXdeviceDTO CustomerXdeviceDTO);
+    boolean update(String code,CustomerXdeviceDTO CustomerXdeviceDTO);
     boolean delete(String code)throws WmeterException;
     List<CustomerXdeviceDTO> list();
 }

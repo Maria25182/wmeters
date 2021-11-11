@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -27,24 +27,31 @@ public class CustomerXdeviceEntity {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dateInstallation;
     @Id
-    @Column(name = "uid_customerxdevice", nullable = false, length = -1)
+    @Column(name = "uid_customerxdevice", nullable = false)
     private String uidCustomerXdevice;
     @ManyToOne
     @JoinColumn(name = "uid_customer", referencedColumnName = "uid_customer", nullable = false)
-    private CustomerEntity uid_Customer;
+    private CustomerEntity uidCustomer;
     @ManyToOne
     @JoinColumn(name = "uid_device", referencedColumnName = "uid_device", nullable = false)
-    private DeviceEntity uid_Device;
+    private DeviceEntity uidDevice;
     @ManyToOne
     @JoinColumn(name = "uid_cosumption", referencedColumnName = "uid_cosumption", nullable = false)
-    private CosumptionEntity uid_Cosumption;
+    private CosumptionEntity uidCosumption;
 
 
 
     public CustomerXdeviceEntity(CustomerXdeviceDTO customerxDeviceDTO) {
         BeanUtils.copyProperties(customerxDeviceDTO,this);
         //generar uid
+        this.uidCustomer =new CustomerEntity();
+        this.uidCustomer.setUidCustomer(customerxDeviceDTO.getUidCustomer().getUidCustomer());
+        this.uidCosumption =new CosumptionEntity();
+        this.uidCosumption.setUidCosumption(customerxDeviceDTO.getUidCosumption().getUidCosumption());
+        this.uidDevice =new DeviceEntity();
+        this.uidDevice.setUidDevice(customerxDeviceDTO.getUidDevice().getUidDevice());
         this.uidCustomerXdevice = UUID.randomUUID().toString();
+        this.dateInstallation = customerxDeviceDTO.getDateInstallation();
     }
 
     public CustomerXdeviceDTO tocustomexDevicerDTO(){

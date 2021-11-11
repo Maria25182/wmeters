@@ -19,8 +19,8 @@ public class CustomerXdeviceImp implements CustomerXdeviceAble {
     }
 
     @Override
-    public CustomerXdeviceDTO update(CustomerXdeviceDTO CustomerDTO) {
-        return null;
+    public boolean update(String code,CustomerXdeviceDTO CustomerxDeviceDTO) {
+        return customerXdevicePersistence.update(code,CustomerxDeviceDTO);
     }
 
     @Override
