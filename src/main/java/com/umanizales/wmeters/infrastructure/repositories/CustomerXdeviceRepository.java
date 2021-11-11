@@ -17,7 +17,7 @@ public interface CustomerXdeviceRepository extends JpaRepository<CustomerXdevice
     @Transactional
     @Modifying
     @Query("UPDATE CustomerXdeviceEntity  d SET " +
-            "d.dateInstallation = :#{#CustomerEntity.dateInstallation }, "+
+            "d.dateInstallation = :#{#CustomerXdeviceEntity.dateInstallation }, "+
             "d.uidCosumption= :#{#CustomerXdeviceEntity.uidCosumption}," +
             "d.uidCustomer= :#{#CustomerXdeviceEntity.uidCustomer}," +
             "d.uidDevice= :#{#CustomerXdeviceEntity.uidDevice} WHERE d.uidCustomerXdevice LIKE :code")
