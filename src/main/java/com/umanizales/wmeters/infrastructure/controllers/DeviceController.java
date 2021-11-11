@@ -3,7 +3,9 @@ package com.umanizales.wmeters.infrastructure.controllers;
 import com.umanizales.wmeters.application.CosumptionImp;
 import com.umanizales.wmeters.application.DeviceImp;
 import com.umanizales.wmeters.domain.CosumptionDTO;
+import com.umanizales.wmeters.domain.CustomerDTO;
 import com.umanizales.wmeters.domain.DeviceDTO;
+import com.umanizales.wmeters.exception.WmeterException;
 import com.umanizales.wmeters.infrastructure.controllers.dto.ResponseDTO;
 import com.umanizales.wmeters.infrastructure.repositories.CosumptionEntity;
 import org.apache.coyote.Response;
@@ -28,5 +30,15 @@ public class DeviceController {
     public @ResponseBody ResponseEntity<ResponseDTO> list(){
         return  new ResponseEntity<>(new ResponseDTO("success", deviceImp. list(),null),
                 HttpStatus.OK);
+    }
+    @DeleteMapping("{code}")
+    public @ResponseBody ResponseEntity<ResponseDTO>deleteDevice(@PathVariable String code)throws WmeterException {
+        return  new ResponseEntity<>(new ResponseDTO("success",deviceImp.delete(code),null),
+                HttpStatus.OK);
+    }
+    @PutMapping("{code}")
+    public @ResponseBody ResponseEntity<ResponseDTO>updateDevice(@PathVariable String code
+            ,@RequestBody @Valid DeviceDTO deviceDTO)throws WmeterException {
+        return new ResponseEntity<>(new ResponseDTO("Success",deviceImp.update(code,deviceDTO),null), HttpStatus.OK);
     }
 }

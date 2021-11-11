@@ -1,6 +1,7 @@
 package com.umanizales.wmeters.application;
 
 import com.umanizales.wmeters.domain.CosumptionDTO;
+import com.umanizales.wmeters.exception.WmeterException;
 import com.umanizales.wmeters.infrastructure.repositories.CosumptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,13 +20,15 @@ public class CosumptionImp implements CosumptionAble{
     }
 
     @Override
-    public CosumptionDTO update(CosumptionDTO cosumptionDTO) {
-        return null;
+    public boolean update(String code,CosumptionDTO cosumptionDTO) {
+        return cosumptionPersistence.update(code,cosumptionDTO);
     }
 
     @Override
-    public boolean delete(String code) {
-        return false;
+    public boolean delete(String code) throws WmeterException {
+
+    return  cosumptionPersistence.delete(code);
+
     }
 
     @Override

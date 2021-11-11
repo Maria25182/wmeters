@@ -1,8 +1,10 @@
 package com.umanizales.wmeters.infrastructure.adapters;
 
+import com.umanizales.wmeters.application.CosumptionAble;
 import com.umanizales.wmeters.application.CustomerAble;
 import com.umanizales.wmeters.domain.CosumptionDTO;
 import com.umanizales.wmeters.domain.CustomerDTO;
+import com.umanizales.wmeters.exception.WmeterException;
 import com.umanizales.wmeters.infrastructure.repositories.CosumptionEntity;
 import com.umanizales.wmeters.infrastructure.repositories.CosumptionRepository;
 import com.umanizales.wmeters.infrastructure.repositories.CustomerEntity;
@@ -24,24 +26,30 @@ public class PostgresCustomerRepository implements CustomerAble {
     }
 
     @Override
-    public CustomerDTO update(CustomerDTO CustomerDTO) {
-        return  customerRepository.save(new CustomerEntity(CustomerDTO)).tocustomerDTO();
+    public boolean update(String code, CustomerDTO CustomerDTO) {
+        return customerRepository.update(new CustomerEntity(CustomerDTO),code)>=1;
+        //customerRepository.
     }
 
     @Override
-    public boolean delete(String code) {
-        customerRepository.deleteById(code);
-        return true;
+    public boolean delete(String code)throws WmeterException {
+        if(customerRepository.existsById(code)){
+            try{
+                customerRepository.deleteById(code);
+                return true;
+            }catch(Exception e){
+                throw  new WmeterException("el codigo no se puede eliminar"+e);
+            }
+
+        }else{
+            throw new WmeterException("El codigo a borrar no existe" + code);
+            }
     }
 
     @Override
     public List<CustomerDTO> list() {
-
-        List<CustomerEntity> customers = customerRepository.findAll();
         List<CustomerDTO> customerDTO = new ArrayList<>();
-        for(CustomerEntity custome: customers){
-            customerDTO.add(custome.tocustomerDTO());
-        }
+        customerRepository.getCustomer().forEach(cos -> customerDTO.add(cos.tocustomerDTO()));
         return customerDTO;
     }
 

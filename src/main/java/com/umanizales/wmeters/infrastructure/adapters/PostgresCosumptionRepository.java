@@ -2,11 +2,13 @@ package com.umanizales.wmeters.infrastructure.adapters;
 
 import com.umanizales.wmeters.application.CosumptionAble;
 import com.umanizales.wmeters.domain.CosumptionDTO;
+import com.umanizales.wmeters.exception.WmeterException;
 import com.umanizales.wmeters.infrastructure.repositories.CosumptionEntity;
 import com.umanizales.wmeters.infrastructure.repositories.CosumptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,23 +26,34 @@ public class PostgresCosumptionRepository implements CosumptionAble {
     }
 
     @Override
-    public CosumptionDTO update(CosumptionDTO cosumptionDTO) {
-        return cosumptionRepository.save(new CosumptionEntity(cosumptionDTO)).tocosumptionDTO();
+    public boolean update(String code,CosumptionDTO cosumptionDTO) {
+        return cosumptionRepository.update(new CosumptionEntity(cosumptionDTO),code)>=1;
     }
 
     @Override
-    public boolean delete(String code) {
-       cosumptionRepository.deleteById(code);
-        return true;
+    public boolean delete(String code)throws WmeterException {
+
+        if (cosumptionRepository.existsById(code)) {
+            try {
+                cosumptionRepository.deleteById(code);
+                return true;
+            } catch (Exception e) {
+              throw  new WmeterException("el codigo"+e);
+            }
+
+
+        } else {
+            throw new WmeterException("El codigo a borrar no existe" + code);
+        }
+
+
     }
 
     @Override
     public List<CosumptionDTO> list() {
-       List<CosumptionEntity> cosumptions = cosumptionRepository.findAll();
        List<CosumptionDTO> cosumptionDTO = new ArrayList<>();
-       for(CosumptionEntity cosumptio: cosumptions){
-            cosumptionDTO.add(cosumptio.tocosumptionDTO());
-       }
+       cosumptionRepository.getCosumption().forEach(cos -> cosumptionDTO.add(cos.tocosumptionDTO()));
        return cosumptionDTO;
     }
+
 }

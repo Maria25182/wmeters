@@ -3,6 +3,7 @@ package com.umanizales.wmeters.infrastructure.adapters;
 import com.umanizales.wmeters.application.CustomerXdeviceAble;
 import com.umanizales.wmeters.domain.CustomerDTO;
 import com.umanizales.wmeters.domain.CustomerXdeviceDTO;
+import com.umanizales.wmeters.exception.WmeterException;
 import com.umanizales.wmeters.infrastructure.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,17 +27,24 @@ public class PostgresCustomerXdeviceRepository implements  CustomerXdeviceAble{
     }
 
     @Override
-    public boolean delete(String code) {
-       customerXdeviceRepository.deleteById(code);
-        return true;
+    public boolean delete(String code) throws WmeterException {
+        if(customerXdeviceRepository.existsById(code)) {
+            try{
+                customerXdeviceRepository.deleteById(code);
+                return true;
+
+        }catch(Exception e){
+            throw  new WmeterException("el codigo no se puede eliminar"+e);
+        }
+        }else{
+            throw new WmeterException("El codigo a borrar no existe" + code);
+        }
     }
     @Override
     public List<CustomerXdeviceDTO> list() {
-        List<CustomerXdeviceEntity> customers = customerXdeviceRepository.findAll();
+
         List<CustomerXdeviceDTO> customerXdeviceDTOS = new ArrayList<>();
-        for(CustomerXdeviceEntity cusxdevice: customers){
-           customerXdeviceDTOS.add(cusxdevice.tocustomexDevicerDTO());
-        }
+        customerXdeviceRepository.getCustomerXdeviceEntity().forEach(cos -> customerXdeviceDTOS.add(cos.tocustomexDevicerDTO()));
         return customerXdeviceDTOS;
     }
 

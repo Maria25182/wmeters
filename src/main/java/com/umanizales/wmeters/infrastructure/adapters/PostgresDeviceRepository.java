@@ -3,10 +3,8 @@ package com.umanizales.wmeters.infrastructure.adapters;
 import com.umanizales.wmeters.application.DeviceAble;
 import com.umanizales.wmeters.domain.CosumptionDTO;
 import com.umanizales.wmeters.domain.DeviceDTO;
-import com.umanizales.wmeters.infrastructure.repositories.CosumptionEntity;
-import com.umanizales.wmeters.infrastructure.repositories.CosumptionRepository;
-import com.umanizales.wmeters.infrastructure.repositories.DeviceEntity;
-import com.umanizales.wmeters.infrastructure.repositories.DeviceRepository;
+import com.umanizales.wmeters.exception.WmeterException;
+import com.umanizales.wmeters.infrastructure.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -24,23 +22,29 @@ public class PostgresDeviceRepository implements DeviceAble {
     }
 
     @Override
-    public DeviceDTO update(DeviceDTO DeviceDTO) {
-        return  deviceRepository.save(new DeviceEntity(DeviceDTO)).todeviceDTO();
+    public boolean update(String code,DeviceDTO DeviceDTO) {
+        return deviceRepository.update(new DeviceEntity(DeviceDTO),code)>=1;
     }
 
     @Override
-    public boolean delete(String code) {
-      deviceRepository.deleteById(code);
-        return true;
+    public boolean delete(String code)throws WmeterException {
+        if(deviceRepository.existsById(code)) {
+            try {
+                deviceRepository.deleteById(code);
+                return true;
+            }catch (Exception e){
+                throw  new WmeterException("El codigo no se puede eliminar, posee relaciones " +e);
+            }
+        }else{
+            throw new WmeterException("El codigo a borrar no existe" + code);
+        }
     }
 
     @Override
     public List<DeviceDTO> list() {
-        List<DeviceEntity> devices = deviceRepository.findAll();
+;
         List<DeviceDTO> deviceDTOS= new ArrayList<>();
-        for(DeviceEntity devic: devices){
-            deviceDTOS.add(devic.todeviceDTO());
-        }
+       deviceRepository.getDevice().forEach(cos -> deviceDTOS.add(cos.todeviceDTO()));
         return deviceDTOS;
     }
 

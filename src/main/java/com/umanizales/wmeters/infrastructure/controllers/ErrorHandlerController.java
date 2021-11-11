@@ -1,5 +1,6 @@
 package com.umanizales.wmeters.infrastructure.controllers;
 
+import com.umanizales.wmeters.exception.WmeterException;
 import com.umanizales.wmeters.infrastructure.controllers.dto.ErrorDTO;
 import com.umanizales.wmeters.infrastructure.controllers.dto.ResponseDTO;
 import org.springframework.http.HttpStatus;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.List;
 @ControllerAdvice
@@ -24,6 +26,12 @@ public class ErrorHandlerController {
         ResponseDTO response = new ResponseDTO( message,null , listErrors);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
+@ExceptionHandler(WmeterException.class)
+    protected ResponseEntity<?>handle(WmeterException ex){
+    ResponseDTO response = new ResponseDTO(ex.getMessage(),null, null);
+    return  new ResponseEntity<>(response,HttpStatus.NOT_FOUND);
+}
+
 
 }
 

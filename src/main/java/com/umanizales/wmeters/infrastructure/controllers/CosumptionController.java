@@ -2,6 +2,7 @@ package com.umanizales.wmeters.infrastructure.controllers;
 
 import com.umanizales.wmeters.application.CosumptionImp;
 import com.umanizales.wmeters.domain.CosumptionDTO;
+import com.umanizales.wmeters.exception.WmeterException;
 import com.umanizales.wmeters.infrastructure.controllers.dto.ResponseDTO;
 import com.umanizales.wmeters.infrastructure.repositories.CosumptionEntity;
 import org.apache.coyote.Response;
@@ -28,4 +29,19 @@ public class CosumptionController {
         return  new ResponseEntity<>(new ResponseDTO("success", cosumptionImp. list(),null),
                 HttpStatus.OK);
     }
+    //update
+    @PutMapping("{code}")
+    public @ResponseBody ResponseEntity<ResponseDTO>updateCosumption(@PathVariable String code
+                                                                    ,@RequestBody @Valid CosumptionDTO cosumptionDTO)throws WmeterException {
+        return new ResponseEntity<>(new ResponseDTO("Success",cosumptionImp.update(code,cosumptionDTO),null), HttpStatus.OK);
+    }
+        // delete
+    @DeleteMapping("{code}")
+    public @ResponseBody ResponseEntity<ResponseDTO>deleteCosumption(@PathVariable String code)throws WmeterException {
+        return  new ResponseEntity<>(new ResponseDTO("success",cosumptionImp.delete(code),null),
+                HttpStatus.OK);
+    }
+
+
+
 }

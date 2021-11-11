@@ -4,6 +4,7 @@ import com.umanizales.wmeters.application.CustomerImp;
 import com.umanizales.wmeters.application.CustomerXdeviceImp;
 import com.umanizales.wmeters.domain.CustomerDTO;
 import com.umanizales.wmeters.domain.CustomerXdeviceDTO;
+import com.umanizales.wmeters.exception.WmeterException;
 import com.umanizales.wmeters.infrastructure.controllers.dto.ResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,12 @@ public class CustomerXdeviceController {
     @GetMapping
     public @ResponseBody ResponseEntity<ResponseDTO> list(){
         return  new ResponseEntity<>(new ResponseDTO("success", customerXdeviceImp. list(),null),
+                HttpStatus.OK);
+    }
+    @DeleteMapping("{code}")
+    public @ResponseBody ResponseEntity<ResponseDTO>deleteCustomerxDevice(@PathVariable String code)throws WmeterException {
+        return  new ResponseEntity<>(new ResponseDTO("success",customerXdeviceImp
+                .delete(code),null),
                 HttpStatus.OK);
     }
 }

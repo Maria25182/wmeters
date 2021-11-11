@@ -19,7 +19,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-@Table(name = "customerXdevice", schema = "public", catalog = "wmeter")
+@Table(name = "customerxdevice", schema = "public", catalog = "wmeter")
 public class CustomerXdeviceEntity {
 
     @Basic
@@ -27,7 +27,7 @@ public class CustomerXdeviceEntity {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dateInstallation;
     @Id
-    @Column(name = "uid_customerXdevice", nullable = false, length = -1)
+    @Column(name = "uid_customerxdevice", nullable = false, length = -1)
     private String uidCustomerXdevice;
     @ManyToOne
     @JoinColumn(name = "uid_customer", referencedColumnName = "uid_customer", nullable = false)

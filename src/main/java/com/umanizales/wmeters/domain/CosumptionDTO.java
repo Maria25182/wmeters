@@ -14,6 +14,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CosumptionDTO {
+
+
     @NotNull
     private LocalDate dateCapture;
     @NotNull

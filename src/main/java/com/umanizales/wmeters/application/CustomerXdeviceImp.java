@@ -2,6 +2,7 @@ package com.umanizales.wmeters.application;
 
 import com.umanizales.wmeters.domain.CustomerDTO;
 import com.umanizales.wmeters.domain.CustomerXdeviceDTO;
+import com.umanizales.wmeters.exception.WmeterException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 public class CustomerXdeviceImp implements CustomerXdeviceAble {
-
+    @Autowired
     @Qualifier("PostgresCustomerXdeviceRepository")
     private CustomerXdeviceAble customerXdevicePersistence;
     @Override
@@ -23,8 +24,10 @@ public class CustomerXdeviceImp implements CustomerXdeviceAble {
     }
 
     @Override
-    public boolean delete(String code) {
-        return false;
+    public boolean delete(String code) throws WmeterException {
+
+        return  customerXdevicePersistence.delete(code);
+
     }
 
     @Override

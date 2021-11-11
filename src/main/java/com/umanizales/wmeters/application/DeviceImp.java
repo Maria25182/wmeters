@@ -1,6 +1,7 @@
 package com.umanizales.wmeters.application;
 
 import com.umanizales.wmeters.domain.DeviceDTO;
+import com.umanizales.wmeters.exception.WmeterException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -17,13 +18,14 @@ public class DeviceImp implements DeviceAble{
     }
 
     @Override
-    public DeviceDTO update(DeviceDTO DeviceDTO) {
-        return null;
+    public boolean update(String code, DeviceDTO DeviceDTO) {
+        return devicePersistence.update(code,DeviceDTO);
     }
 
     @Override
-    public boolean delete(String code) {
-        return false;
+    public boolean delete(String code) throws WmeterException {
+        return  devicePersistence.delete(code);
+
     }
 
     @Override
