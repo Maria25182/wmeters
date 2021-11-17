@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 public class DeviceDTO {
 
 
-
+    private String uidDevice;
     private String name;
 
     private String description;

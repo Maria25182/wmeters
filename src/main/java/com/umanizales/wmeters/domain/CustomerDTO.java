@@ -13,7 +13,7 @@ import javax.validation.constraints.Positive;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CustomerDTO{
-
+    private String uidCustomer;
     @NotNull
     private String nameCustomer;
     @NotNull
