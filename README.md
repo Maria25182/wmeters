@@ -1,3 +1,3 @@
 # wmeters
 v1.0_bd
-The project has implemented all the crud metodos so far does not have any frontend view, has swagger for testing.
+The project has implemented all the crud so far does not have any frontend view, it has swagger for testing.
